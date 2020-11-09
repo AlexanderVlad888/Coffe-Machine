@@ -1,0 +1,186 @@
+package machine;
+import java.util.Arrays;
+import java.util.Scanner;
+public class CoffeeMachine {
+    static int water = 400;
+    static int milk = 540;
+    static int coffeeBeans = 120;
+    static int cups = 9;
+    static int money = 550;
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        service();
+    }
+    static void remaining() {
+        printStockCoffeeMachine();
+        service();
+    }
+    static void exit() {
+
+    }
+    
+    static void printStockCoffeeMachine() {
+        System.out.println();
+        System.out.println("The coffee machine has:");
+        System.out.println(water + " of water");
+        System.out.println(milk +" of milk");
+        System.out.println(coffeeBeans + " of coffee beans");
+        System.out.println(cups + " of disposable cups");
+        System.out.println("$" + money + " of money");
+        System.out.println();
+    }
+    static void service() {
+        Scanner input = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Write action (buy, fill, take, remaining, exit):");
+        String choice = input.next();
+        if (choice.equals("buy")) {
+            System.out.println();
+            System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+            if (input.hasNextInt()) {
+                int choiceBuy = input.nextInt();
+                buy(choiceBuy);
+            } else if (input.hasNext()){
+                String back = input.next();
+                if (back.equals("back"));
+                service();
+            }
+        } else if (choice.equals("fill")) {
+            fill();
+        } else if (choice.equals("take")) {
+            take();
+        } else if (choice.equals("remaining")) {
+            remaining();
+        } else if (choice.equals("exit")) {
+            exit();
+        } else {
+            //System.out.println("Введите один из следующих режимов(buy, fill, take, remaining, exit)");
+            service();
+        }
+
+    }
+    static void fill(){
+        Scanner input = new Scanner(System. in);
+        System.out.println("Write how many ml of water do you want to add:");
+        water += input.nextInt();
+        System.out.println("Write how many ml of milk do you want to add:");
+        milk += input.nextInt();
+        System.out.println("Write how many grams of coffee beans do you want to add:");
+        coffeeBeans += input.nextInt();
+        System.out.println("Write how many disposable cups of coffee do you want to add:");
+        cups += input.nextInt();
+        
+        service();
+
+
+    }
+    static void take() {
+        ;
+        System.out.println("I gave you $" + money);
+        System.out.println();
+        money -= money;
+        service();
+
+    }
+    static void buy(int x){
+       switch (x) {
+           case(1):
+               int[] cupEspresso = new int[] {water / 250, coffeeBeans / 6};
+               //System.out.println(Arrays.toString(cupEspresso));
+               Arrays.sort(cupEspresso);
+               //System.out.println(Arrays.toString(cupEspresso));
+               if (cupEspresso[0] >= 1) {
+                   System.out.println("I have enough resources, making you a coffee!");
+                   water -= 250;
+                   coffeeBeans -= 16;
+                   cups -= 1;
+                   money += 4;
+                   service();
+               } else {
+
+                   if (water - 250 < 0) {
+                       System.out.println("Sorry, not enough water!");
+                       service();
+                   } /*else if (coffeeBeans - 16 < 0) {
+                       System.out.println("Sorry, not enough coffee beans!");
+                       service();
+                   } else if (cups - 1 < 0) {
+                       System.out.println("Sorry, not enough cups!");
+                       service();
+                   }*/
+
+               }
+
+               break;
+           case (2):
+               int[] cupLatte = new int[] {water / 350, milk / 75, coffeeBeans / 20, cups};
+               //System.out.println(Arrays.toString(cup));
+               Arrays.sort(cupLatte);
+               //System.out.println(Arrays.toString(cup));
+               if (cupLatte[0] >= 1) {
+                   System.out.println("I have enough resources, making you a coffee!");
+                   water -= 350;
+                   milk -= 75;
+                   coffeeBeans -= 20;
+                   cups -= 1;
+                   money += 7;
+
+               } else {
+                   if (water - 350 < 0) {
+                       System.out.println("Sorry, not enough water!");
+
+                   } /*else if (milk - 75 < 0) {
+                       System.out.println("Sorry, not enough coffee milk!");
+
+                   } else if (coffeeBeans - 20 < 0) {
+                       System.out.println("Sorry, not enough coffee beans!");
+
+                   } else if (cups - 1 < 0) {
+                       System.out.println("Sorry, not enough cups!");
+
+                   }*/
+               }
+               service();
+               break;
+           case (3):
+               int[] cupCappuccino = new int[] {water / 200, milk / 100, coffeeBeans / 12, cups};
+               //System.out.println(Arrays.toString(cup));
+               Arrays.sort(cupCappuccino);
+               //System.out.println(Arrays.toString(cup));
+               if (cupCappuccino[0] >= 1) {
+                   System.out.println("I have enough resources, making you a coffee!");
+                   water -= 200;
+                   milk -= 100;
+                   coffeeBeans -= 12;
+                   cups -= 1;
+                   money += 6;
+
+               } else {
+                   if (water - 200 < 0) {
+                       System.out.println("Sorry, not enough water!");
+
+                   } /*else if (coffeeBeans - 20 < 0) {
+                       System.out.println("Sorry, not enough coffee beans!");
+
+                   } else if (cups - 1 < 0) {
+                       System.out.println("Sorry, not enough cups!");
+
+                   } else if (milk - 100 < 0) {
+                       System.out.println("Sorry, not enough coffee milk!");
+
+                   }*/
+               }
+
+
+               service();
+               break;
+           default:
+               break;
+
+
+       }
+
+    }
+}
